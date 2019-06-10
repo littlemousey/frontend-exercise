@@ -34,8 +34,8 @@ Create a clone of this repo and setup a webapp wich a multiple-select-filter. Se
 
 
 ## Requirements:
-* Gebruik gestructureerde code (common practices/coding patterns)
-* Het product hoeft niet af te zijn, als het maar voldoende inzicht geeft in het technisch niveau. Daarbij helpt het uiteraard wel als een deel van de code functioneert
-* Je kan een framework (React, AngularJs) gebruiken waar je vertrouwd mee bent, maar je kan ons ook laten zien dat je begrijpt hoe Javascript werkt en patterns die in frameworks worden gebruikt kan reproduceren door VanillaJS te gebruiken (pré)
-* Gebruik Typescript of ES6 (pré)
-* Werken met TDD of BDD (pré)
+* Use structured code (common practices/coding patterns)
+* The product doesnt have to be finished, as long as it gives adequate insight into your technical level. That being said, the code should be functional.
+* You can use a framework (React, AngularJs) that you are familiar with, however, we would love to see the patterns and mechanisms of these frameworks reproduced in vanilla JS.  
+* Use of Typescript or ES6 
+* Working with TDD or BDD 
