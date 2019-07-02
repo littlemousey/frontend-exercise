@@ -3,6 +3,6 @@
 <div class="listContainer">
     <ul>
         <li class="items" *ngFor="let item of items | filter: searchString; let i = index" (click)="onItemClick(i)">
-            {{item.name}}</li>
+            <input type="checkbox" [checked]="item.isSelected"> {{item.name}}</li>
     </ul>
 </div>
