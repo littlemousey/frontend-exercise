@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MultiSelectComponent } from './multi-select/multi-select.component';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 
 @NgModule({
-  declarations: [MultiSelectComponent],
+  declarations: [
+    MultiSelectComponent
+  ],
   imports: [
     CommonModule
   ],
-  exports: [MultiSelectComponent]
+  exports: [
+    MultiSelectComponent
+  ]
 })
 export class SharedModule { }
