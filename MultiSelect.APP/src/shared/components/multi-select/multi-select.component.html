@@ -2,6 +2,7 @@
 
 <div class="listContainer">
     <ul>
-        <li class="items" *ngFor="let item of items | filter: searchString">{{item}}</li>
+        <li class="items" *ngFor="let item of items | filter: searchString; let i = index" (click)="onItemClick(i)">
+            {{item.name}}</li>
     </ul>
 </div>

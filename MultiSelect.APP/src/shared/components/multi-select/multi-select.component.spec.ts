@@ -51,7 +51,17 @@ describe('MultiSelectComponent', () => {
 
   it('should load a list of item, when initialised', () => {
     expect(component.items.length).toBe(2);
-    expect(component.items[0]).toBe('foo');
-    expect(component.items[1]).toBe('bar');
+    expect(component.items[0].name).toBe('foo');
+    expect(component.items[0].isSelected).toBe(false);
+    expect(component.items[1].name).toBe('bar');
+    expect(component.items[1].isSelected).toBe(false);
+  });
+
+  it('should toggle a isSelected state, when on listItem has been clicked', () => {
+    component.onItemClick(0);
+    expect(component.items[0].isSelected).toBe(true);
+
+    component.onItemClick(0);
+    expect(component.items[0].isSelected).toBe(false);
   });
 });
