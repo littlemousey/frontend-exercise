@@ -64,4 +64,13 @@ describe('MultiSelectComponent', () => {
     component.onItemClick(0);
     expect(component.items[0].isSelected).toBe(false);
   });
+
+  it('should order the itemlist by isSelected state, when on listItem has been clicked', () => {
+    component.onItemClick(1);
+
+    expect(component.items[0].name).toBe('bar');
+    expect(component.items[0].isSelected).toBe(true);
+    expect(component.items[1].name).toBe('foo');
+    expect(component.items[1].isSelected).toBe(false);
+  });
 });

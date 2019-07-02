@@ -5,10 +5,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ItemsModel } from 'src/shared/models/items.model';
 import { ListItemModel } from 'src/shared/models/list-item.model';
 
+import { ItemFilterPipe } from 'src/shared/pipes/item-filter.pipe';
+
 @Component({
   selector: 'app-multi-select',
   templateUrl: './multi-select.component.html',
-  styleUrls: ['./multi-select.component.scss']
+  styleUrls: ['./multi-select.component.scss'],
+  providers: [ItemFilterPipe]
 })
 export class MultiSelectComponent implements OnInit {
 
@@ -18,7 +21,8 @@ export class MultiSelectComponent implements OnInit {
   searchString = '';
 
   constructor(
-    private itemsService: ItemsService
+    private itemsService: ItemsService,
+    private itemFilterPipe: ItemFilterPipe
   ) { }
 
   ngOnInit() {
@@ -27,6 +31,7 @@ export class MultiSelectComponent implements OnInit {
 
   onItemClick(index: number) {
     this.items = this.toggleItemSelection(this.items, index);
+    this.items = this.itemFilterPipe.transform(this.items, this.searchString);
   }
 
   private getItems(): void {
