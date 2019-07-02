@@ -39,7 +39,7 @@ export class MultiSelectComponent implements OnInit {
 
       },
       (error: HttpErrorResponse) => {
-        // normal throw an error here
+        // normally you throw an error here
         console.log(error.error);
       }
     )
