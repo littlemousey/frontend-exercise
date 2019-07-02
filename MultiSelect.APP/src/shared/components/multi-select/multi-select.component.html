@@ -1,8 +1,11 @@
-<input type="text" name="searchString" [(ngModel)]="searchString">
-
-<div class="listContainer">
-    <ul>
-        <li class="items" *ngFor="let item of items | filter: searchString; let i = index" (click)="onItemClick(i)">
-            <input type="checkbox" [checked]="item.isSelected">{{item.name}}</li>
-    </ul>
+<div class="MultiSelectComponentContainer">
+    <h1 class="title">Productgroep</h1>
+    <input class="search" type="text" name="searchString" [(ngModel)]="searchString" placeholder="Zoek op...">
+    <div class="listContainer">
+        <ul>
+            <li class="items" *ngFor="let item of items | filter: searchString; let i = index" (click)="onItemClick(i)" 
+            [ngClass]="{'selected': item.isSelected }"> 
+                <input type="checkbox" [checked]="item.isSelected">{{item.name}}</li>
+        </ul>
+    </div>
 </div>
