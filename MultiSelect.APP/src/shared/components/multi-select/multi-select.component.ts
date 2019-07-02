@@ -11,7 +11,8 @@ import { ItemsModel } from 'src/shared/models/items.model';
 })
 export class MultiSelectComponent implements OnInit {
 
-  items: Array<string>
+  items: Array<string>;
+  searchString = '';
 
   constructor(
     private itemsService: ItemsService

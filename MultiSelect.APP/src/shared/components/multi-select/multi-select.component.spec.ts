@@ -1,9 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { MultiSelectComponent } from './multi-select.component';
-import { ItemsService } from '../../../core/items.service';
 import { of, Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+
+import { ItemsService } from '../../../core/items.service';
+
 import { ItemsModel } from 'src/shared/models/items.model';
+
+import { ItemFilterPipe } from 'src/shared/pipes/item-filter.pipe';
+import { MultiSelectComponent } from './multi-select.component';
 
 class MockItemsService {
 
@@ -20,8 +24,12 @@ describe('MultiSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule
+      ],
       declarations: [
-        MultiSelectComponent
+        MultiSelectComponent,
+        ItemFilterPipe
       ],
       providers: [
         { provide: ItemsService, useClass: MockItemsService }

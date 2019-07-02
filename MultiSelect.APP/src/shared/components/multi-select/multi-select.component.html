@@ -1,1 +1,7 @@
-<p>multi-select works!</p>
+<input type="text" name="searchString" [(ngModel)]="searchString">
+
+<div class="listContainer">
+    <ul>
+        <li class="items" *ngFor="let item of items | filter: searchString">{{item}}</li>
+    </ul>
+</div>
