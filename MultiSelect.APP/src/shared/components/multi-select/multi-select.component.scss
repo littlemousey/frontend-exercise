@@ -1,7 +1,5 @@
 @import '../../../styles.scss';
 
-
-
 .listContainer {
     height: 90%;
     overflow: auto;
@@ -29,7 +27,7 @@ h1.title{
     }
     ::placeholder {
         color: $bol-grey;
-}
+    }
 }
 
 ul {
@@ -40,6 +38,16 @@ ul {
         
         &.selected{
             color: $bol-blue;
+
+            span.select-box::after{
+                content: "";
+                background-color:$bol-blue;
+                height: 11px;
+                width: 11px;
+                top: 2px;
+                left: 2px;
+                position: absolute;
+            }
         }
         
     }
@@ -47,4 +55,15 @@ ul {
         color: $bol-blue;
         cursor: pointer;
     }
+}
+
+.select-box{
+    border: 1px solid $bol-grey;
+    height: 15px;
+    width: 15px;
+    display: inline-block;
+    margin-right: 5px;
+    margin-left: 5px;
+    top: 3px;
+    position: relative;
 }

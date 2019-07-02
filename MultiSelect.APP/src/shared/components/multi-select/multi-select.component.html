@@ -5,7 +5,7 @@
         <ul>
             <li class="items" *ngFor="let item of items | filter: searchString; let i = index" (click)="onItemClick(i)" 
             [ngClass]="{'selected': item.isSelected }"> 
-                <input type="checkbox" [checked]="item.isSelected">{{item.name}}</li>
+                <span class="select-box"></span>{{item.name}}</li>
         </ul>
     </div>
 </div>
