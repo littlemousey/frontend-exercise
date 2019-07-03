@@ -39,15 +39,13 @@ export class MultiSelectComponent implements OnInit {
     this.itemsService.getItems().subscribe(
       (response: ItemsModel) => {
         const itemNames = response.data;
-        this.items = itemNames.map((itemName) => { return new ListItemModel(itemName, false) })
-        console.log(this.items);
-
+        this.items = itemNames.map((itemName) => new ListItemModel(itemName, false));
       },
       (error: HttpErrorResponse) => {
         // normally you throw an error here
         console.log(error.error);
       }
-    )
+    );
   }
 
   private toggleItemSelection(items: Array<ListItemModel>, index: number, ): Array<ListItemModel> {
@@ -56,5 +54,4 @@ export class MultiSelectComponent implements OnInit {
 
     return items;
   }
-
 }

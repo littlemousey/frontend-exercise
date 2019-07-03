@@ -14,7 +14,7 @@ class MockItemsService {
   getItems(): Observable<ItemsModel> {
     const mockItems = ['foo', 'bar'];
 
-    return of(new ItemsModel(mockItems))
+    return of(new ItemsModel(mockItems));
   }
 }
 

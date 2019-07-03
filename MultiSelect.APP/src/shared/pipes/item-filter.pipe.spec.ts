@@ -1,5 +1,4 @@
-import { ItemFilterPipe } from "./item-filter.pipe";
-import { ExpectedConditions } from 'protractor';
+import { ItemFilterPipe } from './item-filter.pipe';
 import { ListItemModel } from '../models/list-item.model';
 
 describe('Pipe: Default', () => {
@@ -17,7 +16,7 @@ describe('Pipe: Default', () => {
         const searchString = '';
 
         expect(pipe.transform(list, searchString)).toBe(list);
-    })
+    });
 
     it('should return a filtered list, when searchstring is set', () => {
         const list = [
@@ -30,7 +29,7 @@ describe('Pipe: Default', () => {
         ];
 
         expect(pipe.transform(list, searchString)).toEqual(expectedList);
-    })
+    });
 
     it('should return a empty list, when search string is too specific', () => {
         const list = [
@@ -41,7 +40,7 @@ describe('Pipe: Default', () => {
         const expectedList = [];
 
         expect(pipe.transform(list, searchString)).toEqual(expectedList);
-    })
+    });
 
     it('should return a only a list of selected item, when search string is too specific', () => {
         const list = [
@@ -52,7 +51,7 @@ describe('Pipe: Default', () => {
         const expectedList = [new ListItemModel('foo', true)];
 
         expect(pipe.transform(list, searchString)).toEqual(expectedList);
-    })
+    });
 
     it('should return a filtered list with a selected item and a searchstring filtered item', () => {
         const list = [
@@ -67,8 +66,8 @@ describe('Pipe: Default', () => {
         ];
 
         expect(pipe.transform(list, searchString)).toEqual(expectedList);
-    })
-    
+    });
+
     it('should always return a list, ordered by IsSelected, with true first. And not filtered with a searchstring.', () => {
         const list = [
             new ListItemModel('foo', false),
@@ -83,8 +82,8 @@ describe('Pipe: Default', () => {
         ];
 
         expect(pipe.transform(list, searchString)).toEqual(expectedList);
-    })
-   
+    });
+
     it('should always return a list, ordered by IsSelected, with true first. And filtered with search string.', () => {
         const list = [
             new ListItemModel('foo', false),
@@ -98,5 +97,5 @@ describe('Pipe: Default', () => {
         ];
 
         expect(pipe.transform(list, searchString)).toEqual(expectedList);
-    })
+    });
 });

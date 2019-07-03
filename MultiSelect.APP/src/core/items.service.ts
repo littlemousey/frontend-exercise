@@ -18,9 +18,9 @@ export class ItemsService {
   ) { }
 
   getItems(): Observable<ItemsModel> {
-    return of(items)
+    return of(items);
 
-    // normally you would set the url to an (mock)API here, for this exercise I chose to import the json directly 
+    // normally you would set the url to an (mock)API here, for this exercise I chose to import the json directly
     /* return this.http.get<Array<string>>(this.URL); */
   }
 }

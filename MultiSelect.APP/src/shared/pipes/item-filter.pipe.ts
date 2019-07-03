@@ -6,8 +6,8 @@ import { ListItemModel } from '../models/list-item.model';
 export class ItemFilterPipe implements PipeTransform {
 
   transform(items: Array<ListItemModel>, searchText: string): any[] {
-    if (!items) return [];
-    if (!searchText) return items.sort((a, b) => Number(b.isSelected) - Number(a.isSelected));
+    if (!items) { return []; }
+    if (!searchText) { return items.sort((a, b) => Number(b.isSelected) - Number(a.isSelected)); }
 
     return items
       .filter(it => {
