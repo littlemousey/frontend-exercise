@@ -36,7 +36,6 @@ function Main() {
 
   // handle filter input change
   function onFilterChange(filterText) {
-    console.log(filterText);
     setFilter(filterText);
     localStorage.setItem('filter', filterText);
   }
