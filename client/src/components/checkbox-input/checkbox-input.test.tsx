@@ -5,18 +5,18 @@ import { CheckboxInput } from "./checkbox-input";
 
 describe("components/checkbox", () => {
   let shallowComponent: ShallowWrapper;
-  const onChangeFake = sinon.fake();
+  const fakeOnChange = sinon.fake();
   const ChildrenMock = () => <span>Mock checkbox</span>;
 
   beforeEach(() => {
     shallowComponent = shallow(
-      <CheckboxInput onChange={onChangeFake}>
+      <CheckboxInput onChange={fakeOnChange}>
         <ChildrenMock />
       </CheckboxInput>
     );
   });
 
-  it("has input of type checkbox within a label", () => {
+  it("renders input of type checkbox within a label", () => {
     expect(
       shallowComponent.find("label > input[type='checkbox']")
     ).toBeTruthy();
@@ -25,7 +25,7 @@ describe("components/checkbox", () => {
   it("passes down onChange to input", () => {
     expect(
       shallowComponent.find("input[type='checkbox']").props().onChange
-    ).toBe(onChangeFake);
+    ).toBe(fakeOnChange);
   });
 
   it("renders children content", () => {

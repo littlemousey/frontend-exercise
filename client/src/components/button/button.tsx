@@ -11,8 +11,9 @@ type ButtonProps = DetailedHTMLProps<
 export const Button: React.FC<ButtonProps> = ({ className, ...props }) => (
   <button
     className={css`
-      display: inline-block;
-      padding: 8px 16px;
+      display: block;
+      width: 100%;
+      padding: ${defaults.inputPadding};
       height: 40px;
       border-radius: ${defaults.borderRadius};
       background-color: ${colors.mariner};
@@ -21,7 +22,7 @@ export const Button: React.FC<ButtonProps> = ({ className, ...props }) => (
       border-bottom-width: 2px;
       color: #fff;
       cursor: pointer;
-      font-size: 18px;
+      font-size: ${defaults.inputFontSize};
       transition: ${defaults.transition};
 
       &:active {

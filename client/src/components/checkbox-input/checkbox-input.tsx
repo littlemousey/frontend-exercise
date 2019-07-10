@@ -13,20 +13,21 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
 }) => (
   <label
     className={css`
-      display: inline-block;
+      display: block;
       vertical-align: middle;
       position: relative;
       font: inherit;
       user-select: none;
       padding-left: 35px;
-      margin-bottom: 25px;
+      margin-bottom: 12px;
+      min-height: 18px;
       cursor: pointer;
 
       &:hover {
         color: ${colors.mariner};
 
         & > input:not(:checked) ~ .checkmark:after {
-          background-color: ${colors.alabaster};
+          background-color: ${colors.grayNickel};
         }
       }
     `}
@@ -73,9 +74,9 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
           top: 0;
           left: 0;
           display: inline-block;
-          height: 25px;
-          width: 25px;
-          border: 2px solid #ccc;
+          height: 12px;
+          width: 12px;
+          border: 2px solid ${colors.grayNickel};
           background-color: white;
           vertical-align: middle;
           padding: 4px;
