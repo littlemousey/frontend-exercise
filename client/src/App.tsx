@@ -1,3 +1,4 @@
+import { css } from "emotion";
 import React from "react";
 import logo from "./logo.svg";
 
@@ -6,7 +7,11 @@ const App: React.FC = () => {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <p
+          className={css`
+            color: violet;
+          `}
+        >
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
         <a
