@@ -1,5 +1,6 @@
 import { css, cx } from "emotion";
 import React from "react";
+import { colors, defaults } from "theme";
 
 type CheckboxInputProps = React.DetailedHTMLProps<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -19,12 +20,13 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
       user-select: none;
       padding-left: 35px;
       margin-bottom: 25px;
+      cursor: pointer;
 
       &:hover {
-        color: rgba(48, 99, 208);
+        color: ${colors.mariner};
 
         & > input:not(:checked) ~ .checkmark:after {
-          background-color: #ccc;
+          background-color: ${colors.alabaster};
         }
       }
     `}
@@ -55,10 +57,10 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
 
         &:checked {
           & ~ .content {
-            color: rgba(48, 99, 208);
+            color: ${colors.mariner};
           }
           & ~ .checkmark:after {
-            background-color: rgba(48, 99, 208);
+            background-color: ${colors.mariner};
           }
         }
       `}
@@ -84,6 +86,7 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
             background-color: transparent;
             width: 100%;
             height: 100%;
+            transition: ${defaults.transition};
           }
         `,
         "checkmark"
