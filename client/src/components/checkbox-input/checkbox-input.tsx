@@ -14,12 +14,11 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
   <label
     className={css`
       display: block;
-      vertical-align: middle;
       position: relative;
       font: inherit;
       user-select: none;
       padding-left: 25px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       min-height: 18px;
       cursor: pointer;
 
@@ -74,8 +73,8 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
           top: 0;
           left: 0;
           display: inline-block;
-          height: 10px;
-          width: 10px;
+          height: 12px;
+          width: 12px;
           border: 1px solid ${colors.grayNickel};
           background-color: white;
           vertical-align: middle;
@@ -93,6 +92,16 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
         "checkmark"
       )}
     />
-    <span className="content">{children}</span>
+    <span
+      className={cx(
+        css`
+          font-size: 14px;
+          vertical-align: super;
+        `,
+        "content"
+      )}
+    >
+      {children}
+    </span>
   </label>
 );
