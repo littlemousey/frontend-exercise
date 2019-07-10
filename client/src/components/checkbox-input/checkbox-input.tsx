@@ -18,8 +18,8 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
       position: relative;
       font: inherit;
       user-select: none;
-      padding-left: 35px;
-      margin-bottom: 12px;
+      padding-left: 25px;
+      margin-bottom: 10px;
       min-height: 18px;
       cursor: pointer;
 
@@ -74,12 +74,12 @@ export const CheckboxInput: React.FC<CheckboxInputProps> = ({
           top: 0;
           left: 0;
           display: inline-block;
-          height: 12px;
-          width: 12px;
-          border: 2px solid ${colors.grayNickel};
+          height: 10px;
+          width: 10px;
+          border: 1px solid ${colors.grayNickel};
           background-color: white;
           vertical-align: middle;
-          padding: 4px;
+          padding: 2px;
 
           &:after {
             content: "";

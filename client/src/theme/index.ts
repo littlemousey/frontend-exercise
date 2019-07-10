@@ -2,6 +2,7 @@ export const colors = {
   mariner: "#3063d0",
   mineShaft: "#333333",
   grayNickel: "#bdbcb9",
+  wildSand: "#f6f6f6",
 };
 
 export const defaults = {
