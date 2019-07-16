@@ -2,7 +2,7 @@
 
 Run `yarn` to install the client dependencies.
 
-Run `yarn start` to init the developement server.
+Run `yarn start` to init the development server.
 
 Run `yarn test` to run the test suite.
 
