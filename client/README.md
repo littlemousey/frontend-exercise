@@ -17,5 +17,6 @@ Run `yarn test` to run the test suite.
   - [ ] Filter not selected items based on search input;
   - [ ] Show selected items on top;
   - [ ] Store selected items locally;
+- [ ] Fetch JSON data from github
 
 _Note_: This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

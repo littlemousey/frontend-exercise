@@ -10,6 +10,8 @@ export const Filter: React.FC<FilterProps> = ({ label, children }) => {
   return (
     <section
       className={css`
+        display: flex;
+        flex-direction: column;
         border: 1px solid ${colors.grayNickel};
         border-radius: ${defaults.borderRadius};
         background-color: ${colors.wildSand};
@@ -26,6 +28,9 @@ export const Filter: React.FC<FilterProps> = ({ label, children }) => {
       <div
         className={css`
           margin: 18px 0;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
         `}
       >
         {children}

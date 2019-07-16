@@ -3,7 +3,9 @@ import { CheckboxInput } from "components/checkbox-input";
 import { Filter } from "components/filter";
 import { SearchInput } from "components/search-input";
 import { css } from "emotion";
+import { LocalStorageKeys } from "local-storage";
 import React, { useEffect, useState } from "react";
+import { useLocalState } from "./use-local-state";
 
 type MultipleChoiceFilterProps = {
   items: string[];
@@ -13,7 +15,10 @@ export const MultipleChoiceFilter: React.FC<MultipleChoiceFilterProps> = ({
   items,
 }) => {
   const [filter, setFilter] = useState("");
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [selectedItems, setSelectedItems] = useLocalState<string[]>(
+    LocalStorageKeys.ITEMS,
+    []
+  );
   const [filteredItems, setFilteredItems] = useState<string[]>(
     items.filter(item => item.toLowerCase().includes(filter.toLowerCase()))
   );
@@ -42,6 +47,7 @@ export const MultipleChoiceFilter: React.FC<MultipleChoiceFilterProps> = ({
       <div
         className={css`
           margin: 18px 0;
+          overflow: scroll;
         `}
       >
         {selectedItems.map((item, index) => (

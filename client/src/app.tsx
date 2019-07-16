@@ -1,48 +1,23 @@
-import { MultipleChoiceFilter } from "components/multiple-choice-filter";
+import { ApiProvider } from "api/use-api";
 import { css } from "emotion";
+import { HomePage } from "pages/home-page";
 import React from "react";
 
 export const App: React.FC = () => {
   return (
-    <div
-      className={css`
-        @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap");
-        * {
-          font-family: "Open Sans", sans-serif;
-          font-weight: 300;
-        }
-
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        padding-top: 10%;
-      `}
-    >
+    <ApiProvider>
       <div
         className={css`
-          width: 30%;
+          @import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap");
+          * {
+            font-family: "Open Sans", sans-serif;
+            font-weight: 300;
+          }
         `}
       >
-        <MultipleChoiceFilter
-          items={[
-            "Literatuur &amp; Romans",
-            "Thrillers",
-            "Fantasy",
-            "Kinderboeken",
-            "Young Adult",
-            "Kookboeken",
-            "Reisboeken",
-            "Kunst, Fotografie &amp; Architectuur",
-            "Psychologie",
-          ]}
-        />
+        <HomePage />
       </div>
-    </div>
+    </ApiProvider>
   );
 };
 
