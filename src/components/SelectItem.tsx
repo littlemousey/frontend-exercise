@@ -1,16 +1,14 @@
 import * as React from "react";
 
-import { Item } from "./SelectList";
+import { Item } from "../constants";
 
 interface Props {
-  item: Item;
+  name: string;
+  selected: boolean;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SelectItem: React.SFC<Props> = ({
-  item: { name, selected },
-  onChange
-}) => (
+const SelectItem: React.SFC<Props> = ({ name, selected, onChange }) => (
   <React.Fragment>
     <input type="checkbox" name={name} checked={selected} onChange={onChange} />
     {name}

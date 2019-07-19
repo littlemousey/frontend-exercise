@@ -4,7 +4,8 @@ import { shallow } from "enzyme";
 import SelectItem from "../SelectItem";
 
 const props = {
-  item: { name: "Red Dead Redemption 2", selected: false },
+  name: "Red Dead Redemption 2",
+  selected: false,
   onChange: jest.fn()
 };
 

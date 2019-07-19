@@ -1,9 +1,64 @@
-const defaultState: string[] = [];
+import {
+  FETCH_ITEMS_SUCCESS,
+  SELECT_ITEM,
+  UNSELECT_ITEM,
+  FILTER_ITEMS,
+  Item
+} from "../constants";
 
-type ItemState = string[];
+interface ItemsState {
+  list: Item[];
+  filter: string;
+}
 
-const ItemReducer = (state = defaultState, _action: any): ItemState => {
-  return state;
+export const defaultState: ItemsState = {
+  filter: "",
+  list: []
 };
 
-export default ItemReducer;
+const ItemsReducer = (state = defaultState, action: any): ItemsState => {
+  switch (action.type) {
+    case FETCH_ITEMS_SUCCESS:
+      const list = action.payload.map((itemName: string, index: number) => ({
+        name: itemName,
+        selected: false,
+        index
+      }));
+
+      return {
+        ...state,
+        list,
+        filter: ""
+      };
+    case SELECT_ITEM:
+      const itemsAfterSelect = state.list.slice();
+
+      itemsAfterSelect[action.payload].selected = true;
+
+      return {
+        ...state,
+        list: itemsAfterSelect
+      };
+
+    case UNSELECT_ITEM:
+      const itemsAfterUnselect = state.list.slice();
+
+      itemsAfterUnselect[action.payload].selected = false;
+
+      return {
+        ...state,
+        list: itemsAfterUnselect
+      };
+
+    case FILTER_ITEMS:
+      return {
+        ...state,
+        filter: action.payload
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default ItemsReducer;

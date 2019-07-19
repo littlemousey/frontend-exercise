@@ -1,7 +1,9 @@
 import * as React from "react";
 import injectSheet, { WithSheet } from "react-jss";
+import { Provider } from "react-redux";
 
-import SelectList from "./SelectList";
+import configureStore from "../store";
+import Layout from "../containers/Layout";
 
 const styles = {
   app: {
@@ -11,10 +13,12 @@ const styles = {
 
 type Props = WithSheet<typeof styles>;
 
-const App: React.SFC<Props> = ({ classes: { app } }) => (
-  <div className={app}>
-    <SelectList />
-  </div>
+export const App: React.SFC<Props> = ({ classes: { app } }) => (
+  <Provider store={configureStore()}>
+    <div className={app}>
+      <Layout />
+    </div>
+  </Provider>
 );
 
 export default injectSheet(styles)(App);
