@@ -14,6 +14,14 @@ interface Props {
 }
 
 export class SelectItemContainer extends React.Component<Props> {
+  componentDidMount() {
+    const { index, selected, select } = this.props;
+    const localValue = localStorage.getItem(`item-${index}`);
+
+    if (localValue === "selected" && !selected) {
+      select(index);
+    }
+  }
   getSnapshotBeforeUpdate() {
     const el = this.props.containerRef;
 
@@ -35,7 +43,9 @@ export class SelectItemContainer extends React.Component<Props> {
 
     if (checked) {
       select(index);
+      localStorage.setItem(`item-${index}`, "selected");
     } else {
+      localStorage.setItem(`item-${index}`, "unselected");
       unselect(index);
     }
   };

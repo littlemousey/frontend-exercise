@@ -13,6 +13,8 @@ const props = {
   containerRef: (<div /> as unknown) as HTMLDivElement
 };
 
+jest.spyOn(Storage.prototype, "setItem");
+
 describe("containers/SelectItem", () => {
   it("should render presentational with correct props", () => {
     const component = shallow(<SelectItemContainer {...props} />);
@@ -26,7 +28,7 @@ describe("containers/SelectItem", () => {
     });
   });
   describe("handleChange", () => {
-    it("should call props.select if event is checked", () => {
+    it("should call props.select and store locally if event is checked", () => {
       const component = shallow(<SelectItemContainer {...props} />);
 
       (component.instance() as SelectItemContainer).handleChange(({
@@ -36,6 +38,10 @@ describe("containers/SelectItem", () => {
       } as unknown) as React.ChangeEvent<HTMLInputElement>);
 
       expect(props.select).toBeCalledWith(props.index);
+      expect(window.localStorage.setItem).toBeCalledWith(
+        `item-${props.index}`,
+        "selected"
+      );
     });
     it("should call props.unselect if event is not checked", () => {
       const component = shallow(<SelectItemContainer {...props} />);
@@ -47,6 +53,10 @@ describe("containers/SelectItem", () => {
       } as unknown) as React.ChangeEvent<HTMLInputElement>);
 
       expect(props.unselect).toBeCalledWith(props.index);
+      expect(window.localStorage.setItem).toBeCalledWith(
+        `item-${props.index}`,
+        "unselected"
+      );
     });
   });
 });
