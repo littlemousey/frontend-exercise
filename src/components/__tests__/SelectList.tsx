@@ -1,14 +1,18 @@
 import * as React from "react";
 import { shallow } from "enzyme";
 
-import SelectList from "../SelectList";
+import { SelectList } from "../SelectList";
 import SelectItem from "../../containers/SelectItem";
 
 const props = {
   items: [
     { name: "Travel Guide", selected: false, index: 0 },
     { name: "Physics Textbook", selected: false, index: 1 }
-  ]
+  ],
+  classes: {
+    list: "list"
+  },
+  theme: undefined as undefined
 };
 
 describe("components/SelectList", () => {

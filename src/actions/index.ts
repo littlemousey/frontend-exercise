@@ -6,7 +6,8 @@ import {
   SELECT_ITEM,
   UNSELECT_ITEM,
   FILTER_ITEMS,
-  URL
+  URL,
+  RootState
 } from "../constants";
 
 const fetchItemsSuccess = (items: Item[]) => ({
@@ -36,4 +37,21 @@ export const fetchItems = () => (dispatch: Dispatch<any>) => {
     .then(data => {
       dispatch(fetchItemsSuccess(data));
     });
+};
+
+export const submitItems = () => (
+  _dispatch: Dispatch<any>,
+  getState: () => RootState
+) => {
+  const {
+    items: { list }
+  } = getState();
+  const selectedItems = list
+    .filter(item => item.selected === true)
+    .map(item => item.name);
+
+  return fetch(URL, {
+    method: "POST",
+    body: JSON.stringify(selectedItems)
+  });
 };

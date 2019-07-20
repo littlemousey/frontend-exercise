@@ -20,7 +20,7 @@ const ItemsReducer = (state = defaultState, action: any): ItemsState => {
   switch (action.type) {
     case FETCH_ITEMS_SUCCESS:
       const list = action.payload.map((itemName: string, index: number) => ({
-        name: itemName,
+        name: itemName.replace(/&amp;/g, "&").replace(/&#x27;/g, "'"),
         selected: false,
         index
       }));

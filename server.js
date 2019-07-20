@@ -11,6 +11,10 @@ app.get("/", function(_req, res, _next) {
   res.json(data);
 });
 
+app.post("/", function(_req, res, _next) {
+  res.json({ success: true });
+});
+
 const port = 3090;
 const server = http.createServer(app);
 server.listen(port);

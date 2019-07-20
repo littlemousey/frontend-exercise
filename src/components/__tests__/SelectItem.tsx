@@ -1,12 +1,21 @@
 import * as React from "react";
 import { shallow } from "enzyme";
 
-import SelectItem from "../SelectItem";
+import { SelectItem } from "../SelectItem";
 
 const props = {
   name: "Red Dead Redemption 2",
   selected: false,
-  onChange: jest.fn()
+  onChange: jest.fn(),
+  classes: {
+    container: "container",
+    text: "text",
+    checkbox: "checkbox",
+    control: "control",
+    selected: "selected",
+    blue: "blue"
+  },
+  theme: undefined as undefined
 };
 
 describe("components/SelectItem", () => {

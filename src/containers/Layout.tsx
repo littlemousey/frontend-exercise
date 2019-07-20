@@ -1,11 +1,15 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import { fetchItems } from "../actions/index";
+import { fetchItems, submitItems } from "../actions/index";
 import Layout from "../components/Layout";
+import { hasSelectedItem } from "../selectors/item";
+import { RootState } from "../constants";
 
 interface Props {
+  hasSelectedItem: boolean;
   fetch: () => void;
+  submit: () => void;
 }
 
 export class LayoutContainer extends React.Component<Props> {
@@ -14,11 +18,25 @@ export class LayoutContainer extends React.Component<Props> {
   }
 
   render() {
-    return <Layout />;
+    return (
+      <Layout
+        submit={this.props.submit}
+        hasSelectedItem={this.props.hasSelectedItem}
+      />
+    );
   }
 }
 
+const mapStateToProps = (state: RootState) => ({
+  hasSelectedItem: hasSelectedItem(state)
+});
+
+const mapDispatchToProps = {
+  fetch: fetchItems,
+  submit: submitItems
+};
+
 export default connect(
-  null,
-  { fetch: fetchItems }
+  mapStateToProps,
+  mapDispatchToProps
 )(LayoutContainer);

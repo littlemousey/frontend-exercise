@@ -5,7 +5,9 @@ import { LayoutContainer } from "../Layout";
 import Layout from "../../components/Layout";
 
 const props = {
-  fetch: jest.fn()
+  fetch: jest.fn(),
+  hasSelectedItem: true,
+  submit: jest.fn()
 };
 
 describe("containers/Layout", () => {

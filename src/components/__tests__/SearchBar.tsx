@@ -7,7 +7,8 @@ const props = {
   onChange: jest.fn(),
   classes: {
     container: "container",
-    input: ""
+    input: "input",
+    icon: "icon"
   },
   theme: undefined as undefined
 };

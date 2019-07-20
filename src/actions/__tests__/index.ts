@@ -2,7 +2,13 @@ import configureMockStore from "redux-mock-store";
 import reduxThunk, { ThunkDispatch } from "redux-thunk";
 import { Middleware, AnyAction } from "redux";
 
-import { fetchItems, filterItems, unselectItem, selectItem } from "../index";
+import {
+  fetchItems,
+  filterItems,
+  unselectItem,
+  selectItem,
+  submitItems
+} from "../index";
 import {
   URL,
   FETCH_ITEMS_SUCCESS,
@@ -20,7 +26,14 @@ const mockJsonPromise = Promise.resolve(mockSuccessResponse);
 const mockFetchPromise = Promise.resolve({
   json: () => mockJsonPromise
 });
-const store = mockStore();
+const store = mockStore({
+  items: {
+    list: [
+      { name: "selectedItem", selected: true, index: 0 },
+      { name: "other item", selected: false, index: 1 }
+    ]
+  }
+});
 window.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
 describe("actions", () => {
@@ -67,6 +80,16 @@ describe("actions", () => {
       expect(actions).toHaveLength(1);
       expect(actions[0].type).toEqual(SELECT_ITEM);
       expect(actions[0].payload).toEqual(3);
+    });
+  });
+  describe("submitItems", () => {
+    it("should call fetch to API with selected items", () => {
+      store.dispatch(submitItems()).then(() => {
+        expect(window.fetch).toBeCalledWith(URL, {
+          body: JSON.stringify(["selectedItem"]),
+          method: "POST"
+        });
+      });
     });
   });
 });

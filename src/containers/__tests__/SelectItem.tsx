@@ -9,7 +9,8 @@ const props = {
   index: 0,
   selected: false,
   select: jest.fn(),
-  unselect: jest.fn()
+  unselect: jest.fn(),
+  containerRef: (<div /> as unknown) as HTMLDivElement
 };
 
 describe("containers/SelectItem", () => {

@@ -16,3 +16,10 @@ export interface RootState {
     filter: string;
   };
 }
+
+export const COLORS = {
+  blue: "#1565C0",
+  white: "#FFFFFF",
+  darkGrey: "#E0E0E0",
+  lightGrey: "#FAFAFA"
+};
