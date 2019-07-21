@@ -13,7 +13,8 @@ describe("selectors/item", () => {
           list: [item],
           filter: "",
           limit: 10
-        }
+        },
+        message: ""
       };
 
       expect(getItemsList(state)).toEqual([item]);
@@ -36,7 +37,8 @@ describe("selectors/item", () => {
           list: [item, otherItem],
           filter: "",
           limit: 10
-        }
+        },
+        message: ""
       };
 
       expect(hasSelectedItem(state)).toEqual(true);
@@ -57,7 +59,8 @@ describe("selectors/item", () => {
           list: [item, otherItem],
           filter: "",
           limit: 10
-        }
+        },
+        message: ""
       };
 
       expect(hasSelectedItem(state)).toEqual(false);
@@ -75,7 +78,8 @@ describe("selectors/item", () => {
           list: [item],
           filter: "",
           limit: 10
-        }
+        },
+        message: ""
       };
 
       expect(getLimit(state)).toEqual(10);

@@ -4,7 +4,8 @@ import {
   UNSELECT_ITEM,
   FILTER_ITEMS,
   ItemsState,
-  LOAD_MORE_ITEMS
+  LOAD_MORE_ITEMS,
+  CLEAR_CART
 } from "../constants";
 
 export const defaultState: ItemsState = {
@@ -36,7 +37,6 @@ const ItemsReducer = (state = defaultState, action: any): ItemsState => {
         ...state,
         list: itemsAfterSelect
       };
-
     case UNSELECT_ITEM:
       const itemsAfterUnselect = state.list.slice();
 
@@ -46,17 +46,23 @@ const ItemsReducer = (state = defaultState, action: any): ItemsState => {
         ...state,
         list: itemsAfterUnselect
       };
-
     case FILTER_ITEMS:
       return {
         ...state,
         filter: action.payload
       };
-
     case LOAD_MORE_ITEMS:
       return {
         ...state,
         limit: state.limit + 10
+      };
+    case CLEAR_CART:
+      return {
+        ...state,
+        list: state.list.map(el => {
+          localStorage.setItem(`item-${el.index}`, "unselected");
+          return { ...el, selected: false };
+        })
       };
     default:
       return state;

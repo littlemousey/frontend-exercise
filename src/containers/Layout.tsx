@@ -5,10 +5,12 @@ import { fetchItems, submitItems } from "../actions/index";
 import Layout from "../components/Layout";
 import { hasSelectedItem } from "../selectors/item";
 import { RootState } from "../constants";
+import { getMessage } from "../selectors/message";
 
 interface Props {
   hasSelectedItem: boolean;
   fetch: () => void;
+  message: string;
   submit: () => void;
 }
 
@@ -22,13 +24,15 @@ export class LayoutContainer extends React.Component<Props> {
       <Layout
         submit={this.props.submit}
         hasSelectedItem={this.props.hasSelectedItem}
+        message={this.props.message}
       />
     );
   }
 }
 
 const mapStateToProps = (state: RootState) => ({
-  hasSelectedItem: hasSelectedItem(state)
+  hasSelectedItem: hasSelectedItem(state),
+  message: getMessage(state)
 });
 
 const mapDispatchToProps = {

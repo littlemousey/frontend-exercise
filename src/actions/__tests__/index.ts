@@ -16,7 +16,10 @@ import {
   FILTER_ITEMS,
   UNSELECT_ITEM,
   SELECT_ITEM,
-  LOAD_MORE_ITEMS
+  LOAD_MORE_ITEMS,
+  SHOW_MESSAGE,
+  HIDE_MESSAGE,
+  CLEAR_CART
 } from "../../constants";
 
 type DispatchExts = ThunkDispatch<{}, void, AnyAction>;
@@ -26,7 +29,8 @@ const mockStore = configureMockStore<{}, DispatchExts>(middlewares);
 const mockSuccessResponse = { data: ["Movie", "Game"] };
 const mockJsonPromise = Promise.resolve(mockSuccessResponse);
 const mockFetchPromise = Promise.resolve({
-  json: () => mockJsonPromise
+  json: () => mockJsonPromise,
+  ok: true
 });
 const store = mockStore({
   items: {
@@ -36,10 +40,10 @@ const store = mockStore({
     ]
   }
 });
-window.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
 
 describe("actions", () => {
   beforeEach(() => {
+    window.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
     store.clearActions();
   });
   describe("fetchItems", () => {
@@ -51,6 +55,16 @@ describe("actions", () => {
         expect(actions).toHaveLength(1);
         expect(actions[0].type).toEqual(FETCH_ITEMS_SUCCESS);
         expect(actions[0].payload).toEqual(mockSuccessResponse.data);
+      });
+    });
+    it("should call fetch to API and dispatch showMessage on failure", () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.reject());
+      store.dispatch(fetchItems()).then(() => {
+        expect(window.fetch).toBeCalledWith(URL);
+        const actions = store.getActions();
+
+        expect(actions).toHaveLength(1);
+        expect(actions[0].type).toEqual(SHOW_MESSAGE);
       });
     });
   });
@@ -85,12 +99,31 @@ describe("actions", () => {
     });
   });
   describe("submitItems", () => {
-    it("should call fetch to API with selected items", () => {
+    it("should call fetch to API with selected items and dispatches correct actions on success", () => {
       store.dispatch(submitItems()).then(() => {
         expect(window.fetch).toBeCalledWith(URL, {
           body: JSON.stringify(["selectedItem"]),
           method: "POST"
         });
+        const actions = store.getActions();
+        expect(actions).toHaveLength(2);
+        expect(actions[0].type).toEqual(CLEAR_CART);
+        expect(actions[1].type).toEqual(SHOW_MESSAGE);
+      });
+    });
+    it("should call fetch to API with selected items and dispatches correct actions on failure", () => {
+      window.fetch = jest.fn().mockImplementation(() => Promise.reject());
+      store.dispatch(submitItems()).then(() => {
+        expect(window.fetch).toBeCalledWith(URL, {
+          body: JSON.stringify(["selectedItem"]),
+          method: "POST"
+        });
+        const actions = store.getActions();
+        expect(actions).toHaveLength(1);
+        expect(actions[1].type).toEqual(SHOW_MESSAGE);
+        expect(actions[1].payload).toEqual(
+          "Error: Selected items could not be submitted. Try again"
+        );
       });
     });
   });

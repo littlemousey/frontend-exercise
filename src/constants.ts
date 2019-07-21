@@ -8,6 +8,9 @@ export const URL = "http://127.0.0.1:3090/";
 export const LIST_ITEM_HEIGHT = 40.969;
 const itemData = require("../assets/items.json");
 export const TOTAL_ITEMS = itemData.data.length;
+export const SHOW_MESSAGE = "SHOW_MESSAGE";
+export const HIDE_MESSAGE = "HIDE_MESSAGE";
+export const CLEAR_CART = "CLEAR_CART";
 
 export interface Item {
   name: string;
@@ -23,6 +26,7 @@ export interface ItemsState {
 
 export interface RootState {
   items: ItemsState;
+  message: string;
 }
 
 export const COLORS = {

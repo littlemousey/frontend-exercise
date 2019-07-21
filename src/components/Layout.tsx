@@ -3,9 +3,8 @@ import injectSheet, { WithSheet } from "react-jss";
 
 import SelectList from "../containers/SelectList";
 import SearchBar from "../containers/SearchBar";
-import { COLORS, Item } from "../constants";
+import { COLORS } from "../constants";
 import SubmitButton from "./SubmitButton";
-import { hasSelectedItem } from "../selectors/item";
 
 const styles = {
   layout: {
@@ -30,6 +29,7 @@ const styles = {
 interface OwnProps {
   hasSelectedItem: boolean;
   submit: () => void;
+  message: string;
 }
 
 type Props = OwnProps & WithSheet<typeof styles>;
@@ -37,6 +37,7 @@ type Props = OwnProps & WithSheet<typeof styles>;
 export const Layout: React.SFC<Props> = ({
   hasSelectedItem,
   submit,
+  message,
   classes
 }) => (
   <div className={classes.layout}>
@@ -52,6 +53,7 @@ export const Layout: React.SFC<Props> = ({
     <div className={classes.item}>
       <SubmitButton onClick={submit} disabled={!hasSelectedItem} />
     </div>
+    {message && <div className={classes.item}>{message}</div>}
   </div>
 );
 

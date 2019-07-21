@@ -14,7 +14,8 @@ const props = {
   },
   theme: undefined as undefined,
   hasSelectedItem: true,
-  submit: jest.fn()
+  submit: jest.fn(),
+  message: ""
 };
 
 describe("components/Layout", () => {
