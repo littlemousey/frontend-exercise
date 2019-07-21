@@ -2,10 +2,12 @@ import { connect } from "react-redux";
 
 import SelectList from "../components/SelectList";
 import { RootState } from "../constants";
-import { getItemsList } from "../selectors/item";
+import { getItemsList, getLimit } from "../selectors/item";
+import { loadMoreItems } from "../actions/index";
 
 export const mapStateToProps = (state: RootState) => {
   const regex = new RegExp(state.items.filter, "gim");
+  const limit = getLimit(state);
 
   return {
     items: getItemsList(state)
@@ -19,7 +21,16 @@ export const mapStateToProps = (state: RootState) => {
           return 0;
         }
       })
+      .slice(0, limit),
+    limit
   };
 };
 
-export default connect(mapStateToProps)(SelectList);
+const mapDispatchToProps = {
+  loadMoreItems
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectList);

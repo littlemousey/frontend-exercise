@@ -21,7 +21,8 @@ const music = {
 const state = {
   items: {
     list: [movie, game, music],
-    filter: ""
+    filter: "",
+    limit: 10
   }
 };
 
@@ -48,6 +49,11 @@ describe("containers/SelectList", () => {
       expect(items[0]).toEqual(game);
       //   after that filtered item should come
       expect(items[1]).toEqual(music);
+    });
+    it("should return limit", () => {
+      const stateToPass = mapStateToProps(state);
+
+      expect(stateToPass.limit).toEqual(state.items.limit);
     });
   });
 });

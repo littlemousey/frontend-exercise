@@ -3,17 +3,14 @@ import {
   SELECT_ITEM,
   UNSELECT_ITEM,
   FILTER_ITEMS,
-  Item
+  ItemsState,
+  LOAD_MORE_ITEMS
 } from "../constants";
-
-interface ItemsState {
-  list: Item[];
-  filter: string;
-}
 
 export const defaultState: ItemsState = {
   filter: "",
-  list: []
+  list: [],
+  limit: 10
 };
 
 const ItemsReducer = (state = defaultState, action: any): ItemsState => {
@@ -21,7 +18,7 @@ const ItemsReducer = (state = defaultState, action: any): ItemsState => {
     case FETCH_ITEMS_SUCCESS:
       const list = action.payload.map((itemName: string, index: number) => ({
         name: itemName.replace(/&amp;/g, "&").replace(/&#x27;/g, "'"),
-        selected: false,
+        selected: localStorage.getItem(`item-${index}`) === "selected",
         index
       }));
 
@@ -56,6 +53,11 @@ const ItemsReducer = (state = defaultState, action: any): ItemsState => {
         filter: action.payload
       };
 
+    case LOAD_MORE_ITEMS:
+      return {
+        ...state,
+        limit: state.limit + 10
+      };
     default:
       return state;
   }

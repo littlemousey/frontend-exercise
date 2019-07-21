@@ -3,7 +3,8 @@ import {
   FETCH_ITEMS_SUCCESS,
   SELECT_ITEM,
   UNSELECT_ITEM,
-  FILTER_ITEMS
+  FILTER_ITEMS,
+  LOAD_MORE_ITEMS
 } from "../../constants";
 
 describe("reducers/item", () => {
@@ -25,7 +26,8 @@ describe("reducers/item", () => {
           selected: false
         }
       ],
-      filter: ""
+      filter: "",
+      limit: 10
     });
   });
   it("should handle SELECT_ITEM action", () => {
@@ -36,7 +38,8 @@ describe("reducers/item", () => {
     };
     const state = {
       filter: "",
-      list: [itemToSelect]
+      list: [itemToSelect],
+      limit: 10
     };
     const newState = reducer(state, {
       type: SELECT_ITEM,
@@ -56,7 +59,7 @@ describe("reducers/item", () => {
       selected: true,
       index: 0
     };
-    const state = { list: [itemToUnselect], filter: "" };
+    const state = { list: [itemToUnselect], filter: "", limit: 10 };
     const newState = reducer(state, {
       type: UNSELECT_ITEM,
       payload: itemToUnselect.index
@@ -73,5 +76,10 @@ describe("reducers/item", () => {
     const newState = reducer(undefined, { type: FILTER_ITEMS, payload: "fil" });
 
     expect(newState.filter).toEqual("fil");
+  });
+  it("should handle LOAD_MORE_ITEMS action", () => {
+    const newState = reducer(undefined, { type: LOAD_MORE_ITEMS });
+
+    expect(newState.limit).toEqual(20);
   });
 });

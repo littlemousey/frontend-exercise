@@ -7,14 +7,16 @@ import {
   filterItems,
   unselectItem,
   selectItem,
-  submitItems
+  submitItems,
+  loadMoreItems
 } from "../index";
 import {
   URL,
   FETCH_ITEMS_SUCCESS,
   FILTER_ITEMS,
   UNSELECT_ITEM,
-  SELECT_ITEM
+  SELECT_ITEM,
+  LOAD_MORE_ITEMS
 } from "../../constants";
 
 type DispatchExts = ThunkDispatch<{}, void, AnyAction>;
@@ -53,7 +55,7 @@ describe("actions", () => {
     });
   });
   describe("filterItems", () => {
-    it("should have correcty type and payload", () => {
+    it("should have correct type and payload", () => {
       store.dispatch(filterItems("mo"));
 
       const actions = store.getActions();
@@ -63,7 +65,7 @@ describe("actions", () => {
     });
   });
   describe("unselectItem", () => {
-    it("should have correcty type and payload", () => {
+    it("should have correct type and payload", () => {
       store.dispatch(unselectItem(5));
 
       const actions = store.getActions();
@@ -73,7 +75,7 @@ describe("actions", () => {
     });
   });
   describe("selectItem", () => {
-    it("should have correcty type and payload", () => {
+    it("should have correct type and payload", () => {
       store.dispatch(selectItem(3));
 
       const actions = store.getActions();
@@ -90,6 +92,15 @@ describe("actions", () => {
           method: "POST"
         });
       });
+    });
+  });
+  describe("loadMoreItems", () => {
+    it("should have correct type", () => {
+      store.dispatch(loadMoreItems());
+
+      const actions = store.getActions();
+      expect(actions).toHaveLength(1);
+      expect(actions[0].type).toEqual(LOAD_MORE_ITEMS);
     });
   });
 });

@@ -7,7 +7,8 @@ import {
   UNSELECT_ITEM,
   FILTER_ITEMS,
   URL,
-  RootState
+  RootState,
+  LOAD_MORE_ITEMS
 } from "../constants";
 
 const fetchItemsSuccess = (items: Item[]) => ({
@@ -28,6 +29,10 @@ export const unselectItem = (index: number) => ({
 export const filterItems = (query: string) => ({
   type: FILTER_ITEMS,
   payload: query
+});
+
+export const loadMoreItems = () => ({
+  type: LOAD_MORE_ITEMS
 });
 
 export const fetchItems = () => (dispatch: Dispatch<any>) => {
