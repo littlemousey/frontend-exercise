@@ -4,109 +4,130 @@ import { debounce } from "./debounce.js";
 import { annotateSelected } from "./annotateSelected";
 import { decodeItems } from "./decodeItems";
 
-const multiSelectList = document.getElementById("multi-select");
-const searchField = document.getElementById("search-input");
-const saveButton = document.getElementById("saveButton");
-let listCheckedProperty, renderList;
-const LOCALSTORE_PRODUCTS = "bol_products";
+class ProductSearch {
+  LOCALSTORE_PRODUCTS = "bol_products";
+  listCheckedProperty;
+  renderList;
 
-async function start() {
-  // retrieve data products
-  const response = await fetch("/assets/items.json");
-  const { data } = await response.json();
-  const productList = decodeItems(data);
-  listCheckedProperty = annotateSelected(productList, false, "");
-  const localStorageData = JSON.parse(
-    localStorage.getItem(LOCALSTORE_PRODUCTS)
-  );
-  if (!localStorageData) {
-    renderList = listCheckedProperty;
-    setItemsInDOM(renderList);
-  } else {
-    renderList = localStorageData;
-    setItemsInDOM(renderList);
+  constructor(selectID, searchID, saveID) {
+    this.multiSelectList = document.getElementById(selectID);
+    this.searchField = document.getElementById(searchID);
+    this.saveButton = document.getElementById(saveID);
+    this.start();
+    this.registerEventListeners();
   }
-}
 
-function setItemsInDOM(list) {
-  for (let { name, checked, styling } of list) {
-    const wrapperElement = document.createElement("div");
-    const inputElement = document.createElement("input");
-    const styledInputElement = document.createElement("span");
-    const labelElement = document.createElement("label");
-    inputElement.id = name;
-    inputElement.type = "checkbox";
-    inputElement.checked = checked;
-    inputElement.name = name;
-    styledInputElement.classList.add("styled-checkbox");
-    labelElement.textContent = name;
-    labelElement.htmlFor = name;
-    labelElement.className = styling;
-    wrapperElement.classList.add("checkbox");
-    labelElement.appendChild(inputElement);
-    labelElement.appendChild(styledInputElement);
-    wrapperElement.appendChild(labelElement);
-    multiSelectList.appendChild(wrapperElement);
-  }
-}
-
-start();
-
-// event listeners
-searchField.addEventListener("keyup", debounce(filterList, 250));
-multiSelectList.addEventListener("mouseup", handleCheckBoxClick);
-saveButton.addEventListener("click", saveDataToLocalStorage);
-
-function filterList() {
-  renderList = listCheckedProperty;
-  const searchTag = searchField.value;
-  const selectedList = registerCheckedBoxes();
-  const duplicateList = selectedList.map(item => {
-    return item.name;
-  });
-  const filteredList = renderList.filter(item => {
-    return (
-      item.name.toLowerCase().includes(searchTag) &&
-      !duplicateList.includes(item.name)
+  async start() {
+    // retrieve data products
+    const response = await fetch("/assets/items.json");
+    const { data } = await response.json();
+    const productList = decodeItems(data);
+    this.listCheckedProperty = annotateSelected(productList, false, "");
+    const localStorageData = JSON.parse(
+      localStorage.getItem(this.LOCALSTORE_PRODUCTS)
     );
-  });
-  renderList = [...selectedList, ...filteredList];
-  multiSelectList.innerHTML = "";
-  setItemsInDOM(renderList);
-}
-
-function handleCheckBoxClick(event) {
-  // set styling for label
-  const clickedElement = event.target;
-  if (
-    clickedElement.localName == "label" &&
-    !clickedElement.classList.contains("selected")
-  ) {
-    clickedElement.classList.add("selected");
-  } else {
-    clickedElement.classList.remove("selected");
+    if (!localStorageData) {
+      this.renderList = this.listCheckedProperty;
+      this.setItemsInDOM(this.renderList);
+    } else {
+      this.renderList = localStorageData;
+      this.setItemsInDOM(this.renderList);
+    }
   }
 
-  registerCheckedBoxes();
+  setItemsInDOM(list) {
+    for (let { name, checked, styling } of list) {
+      const wrapperElement = document.createElement("div");
+      const inputElement = document.createElement("input");
+      const styledInputElement = document.createElement("span");
+      const labelElement = document.createElement("label");
+      inputElement.id = name;
+      inputElement.type = "checkbox";
+      inputElement.checked = checked;
+      inputElement.name = name;
+      styledInputElement.classList.add("styled-checkbox");
+      labelElement.textContent = name;
+      labelElement.htmlFor = name;
+      labelElement.className = styling;
+      wrapperElement.classList.add("checkbox");
+      labelElement.appendChild(inputElement);
+      labelElement.appendChild(styledInputElement);
+      wrapperElement.appendChild(labelElement);
+      this.multiSelectList.appendChild(wrapperElement);
+    }
+  }
+
+  registerEventListeners() {
+    this.searchField.addEventListener(
+      "keyup",
+      debounce(this.filterList.bind(this), 250)
+    );
+    this.multiSelectList.addEventListener(
+      "mouseup",
+      this.handleCheckBoxClick.bind(this)
+    );
+    this.saveButton.addEventListener(
+      "click",
+      this.saveDataToLocalStorage.bind(this)
+    );
+  }
+
+  filterList() {
+    this.renderList = this.listCheckedProperty;
+    const searchTag = this.searchField.value;
+    const selectedList = this.registerCheckedBoxes();
+    const duplicateList = selectedList.map(item => {
+      return item.name;
+    });
+    const filteredList = this.renderList.filter(item => {
+      return (
+        item.name.toLowerCase().includes(searchTag) &&
+        !duplicateList.includes(item.name)
+      );
+    });
+    this.renderList = [...selectedList, ...filteredList];
+    this.multiSelectList.innerHTML = "";
+    this.setItemsInDOM(this.renderList);
+  }
+
+  handleCheckBoxClick(event) {
+    // set styling for label
+    const clickedElement = event.target;
+    if (
+      clickedElement.localName == "label" &&
+      !clickedElement.classList.contains("selected")
+    ) {
+      clickedElement.classList.add("selected");
+    } else {
+      clickedElement.classList.remove("selected");
+    }
+
+    this.registerCheckedBoxes();
+  }
+
+  registerCheckedBoxes() {
+    const checkedDOMList = this.multiSelectList.querySelectorAll(
+      'input[type="checkbox"]:checked'
+    );
+
+    const retrievedList = Array.from(checkedDOMList).map(
+      checkbox => checkbox.labels[0].textContent
+    );
+    const listWithCheckedProperty = annotateSelected(
+      retrievedList,
+      true,
+      "selected"
+    );
+    return listWithCheckedProperty;
+  }
+
+  saveDataToLocalStorage() {
+    this.filterList();
+    window.localStorage.setItem(
+      this.LOCALSTORE_PRODUCTS,
+      JSON.stringify(this.renderList)
+    );
+  }
 }
 
-function registerCheckedBoxes() {
-  const checkedDOMList = multiSelectList.querySelectorAll(
-    'input[type="checkbox"]:checked'
-  );
-
-  const retrievedList = Array.from(checkedDOMList).map(
-    checkbox => checkbox.labels[0].textContent
-  );
-  const listWithCheckedProperty = annotateSelected(
-    retrievedList,
-    true,
-    "selected"
-  );
-  return listWithCheckedProperty;
-}
-
-function saveDataToLocalStorage() {
-  filterList();
-  localStorage.setItem(LOCALSTORE_PRODUCTS, JSON.stringify(renderList));
-}
+new ProductSearch("multi-select", "search-input", "saveButton");
