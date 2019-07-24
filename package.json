@@ -1,0 +1,51 @@
+{
+  "name": "bol-frontend-assignment",
+  "version": "1.0.0",
+  "description": "Coding assignment for bol.com",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --env prod --mode production",
+    "dev": "webpack-dev-server --env dev --mode none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hvgeertruy/frontend-exercise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hvgeertruy/frontend-exercise/issues"
+  },
+  "homepage": "https://github.com/hvgeertruy/frontend-exercise#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest-cli": "*",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.36.1",
+    "webpack-babel-jest": "*",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "css-loader": "^3.1.0",
+    "he": "^1.2.0",
+    "script-loader": "^0.7.2",
+    "style-loader": "^0.23.1",
+    "webpack-babel-jest": "^1.0.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ]
+  }
+}
