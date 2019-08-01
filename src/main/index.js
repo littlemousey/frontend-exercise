@@ -1,10 +1,11 @@
 "use strict";
 
-import { debounce } from "./debounce.js";
-import { annotateSelected } from "./annotateSelected";
-import { decodeItems } from "./decodeItems";
+import { debounce } from "../utils/debounce.js";
+import { annotateSelected } from "../utils/annotateSelected";
+import { decodeItems } from "../utils/decodeItems";
 
 class ProductSearch {
+  // maybe divide this file into more sub files
   LOCALSTORE_PRODUCTS = "bol_products";
   listCheckedProperty;
   renderList;
@@ -19,7 +20,7 @@ class ProductSearch {
 
   async start() {
     // retrieve data products
-    const response = await fetch("/assets/items.json");
+    const response = await fetch("../src/assets/items.json");
     const { data } = await response.json();
     const productList = decodeItems(data);
     this.listCheckedProperty = annotateSelected(productList, false, "");
@@ -36,6 +37,7 @@ class ProductSearch {
   }
 
   setItemsInDOM(list) {
+    // replace this with jsx or template literals
     for (let { name, checked, styling } of list) {
       const wrapperElement = document.createElement("div");
       const inputElement = document.createElement("input");

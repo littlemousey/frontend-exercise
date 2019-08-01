@@ -45,13 +45,11 @@ label {
   }
 }
 
-input {
-  &#search-input {
-    border: none;
+#search-input {
+  border: none;
 
-    &:focus {
-      outline: none;
-    }
+  &:focus {
+    outline: none;
   }
 }
 
@@ -101,15 +99,13 @@ input {
   }
 }
 
-button {
-  &.submit {
-    font-size: 14px;
-    padding: 10px 80px;
-    background-color: $button-blue;
-    color: white;
-    border-radius: $radius;
-    border-bottom: 1px solid black;
-  }
+.submit {
+  font-size: 14px;
+  padding: 10px 80px;
+  background-color: $button-blue;
+  color: white;
+  border-radius: $radius;
+  border-bottom: 1px solid black;
 }
 
 .search-img {
